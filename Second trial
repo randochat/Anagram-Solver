@@ -1,0 +1,38 @@
+# Slightly efficient
+from PyDictionary import PyDictionary
+from itertools import permutations
+
+dictionary = PyDictionary()
+possible = []
+
+print('...Anagram solver...')
+letters = input('Enter the letters: ')
+L = list(letters)
+k = list(permutations(L))
+for i in k:
+    var1 = 0
+    length = len(i)
+    for n in range(length-1,0,-1):
+        print(n)
+        word = "".join(i)
+        word = word[0:n+1]
+        print(word)
+        isitaword = dictionary.meaning(word, disable_errors=True)
+        if isitaword == None:
+            continue
+        else:
+            if word not in possible:
+                possible.append(word)
+
+
+while True:
+    val = []
+    number = int(input('Enter the number of letters the word shall have: '))
+    if number == 0:
+        break
+    for i in possible:
+        if len(i) == number:
+            val.append(i)
+    for i in val:
+        print(i , ' means ' , dictionary.meaning(i, disable_errors=True))
+        print('--------------------------------------------------------')
