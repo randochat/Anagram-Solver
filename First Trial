@@ -1,0 +1,27 @@
+# Highly inefficient code!!
+
+from PyDictionary import PyDictionary
+from itertools import permutations
+
+dictionary = PyDictionary()
+possible = []
+
+print('...Anagram solver...')
+letters = input('Enter the letters: ')
+L = list(letters)
+k = list(permutations(L))
+for i in k:
+    var1 = 0
+    length = len(k)
+    for n in range(length-1,0,-1):
+        word = "".join(i)
+        word = word[0:n]
+        isitaword = dictionary.meaning(word, disable_errors=True)
+        if isitaword == None:
+            continue
+        else:
+            if word not in possible:
+                possible.append(word)
+
+for i in possible:
+    print(i , 'meaning:' , dictionary.meaning(i, disable_errors=True))
